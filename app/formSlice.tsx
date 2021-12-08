@@ -3,12 +3,12 @@ import type { RootState } from "./store";
 
 // Define a type for the slice state
 interface FormState {
-  form: object;
+  form: { username: string; period: string; playlistName: string };
 }
 
 // Define the initial state using that type
 const initialState: FormState = {
-  form: {},
+  form: { username: "", period: "", playlistName: "" },
 };
 
 export const formSlice = createSlice({
@@ -17,8 +17,9 @@ export const formSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setForm: (state, action: PayloadAction<object>) => {
-      state.form = action.payload;
+    setForm: (state, { payload }: PayloadAction<FormState>) => {
+      console.log(payload);
+      state.form = payload.form;
     },
   },
 });

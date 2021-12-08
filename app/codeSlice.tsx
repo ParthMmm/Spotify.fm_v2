@@ -4,11 +4,13 @@ import type { RootState } from "./store";
 // Define a type for the slice state
 interface CodeState {
   code: string;
+  token: string;
 }
 
 // Define the initial state using that type
 const initialState: CodeState = {
-  code: "a",
+  code: "",
+  token: "",
 };
 
 export const codeSlice = createSlice({
@@ -20,10 +22,13 @@ export const codeSlice = createSlice({
     setCode: (state, action: PayloadAction<string>) => {
       state.code = action.payload;
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
   },
 });
 
-export const { setCode } = codeSlice.actions;
+export const { setCode, setToken } = codeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCode = (state: RootState) => state.code;

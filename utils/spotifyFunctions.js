@@ -15,6 +15,13 @@ function redirectUrlToSpotifyForLogin() {
   );
 }
 
+function requestToken() {
+  return "https://accounts.spotify.com/api/token";
+}
+
+function createState() {
+  return "asjldf32890u";
+}
 // function checkUrlForSpotifyAccessToken() {
 //   const params = getHashParams();
 
@@ -40,4 +47,4 @@ function redirectUrlToSpotifyForLogin() {
 //   return hashParams;
 // }
 
-export { redirectUrlToSpotifyForLogin };
+export { redirectUrlToSpotifyForLogin, createState };

@@ -3,7 +3,7 @@ import React from "react";
 import { redirectUrlToSpotifyForLogin } from "../utils/spotifyFunctions";
 import { store } from "../app/store";
 function SpotifyLogin() {
-  console.log(redirectUrlToSpotifyForLogin());
+  // console.log(redirectUrlToSpotifyForLogin());
   return (
     <div>
       <Button>

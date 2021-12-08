@@ -13,15 +13,20 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.6.2",
+    "axios": "^0.24.0",
+    "crypto-js": "^4.1.1",
     "formik": "^2.2.9",
     "framer-motion": "^4",
     "graphql": "^16.0.1",
     "next": "12.0.7",
+    "qs": "^6.10.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.6",
     "react-spring": "^9.3.2",
-    "spotify-web-api-js": "^1.5.2"
+    "request": "^2.88.2",
+    "spotify-web-api-js": "^1.5.2",
+    "swr": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "16.11.11",

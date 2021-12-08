@@ -63,8 +63,8 @@ function UserForm() {
           // validate={validate}
           initialValues={initialValues}
           onSubmit={(values, actions) => {
-            console.log(values);
-            store.dispatch(formSlice.actions.setForm(values));
+            // console.log(values);
+            store.dispatch(formSlice.actions.setForm({ form: values }));
             router.push("/create");
             actions.resetForm({});
           }}
