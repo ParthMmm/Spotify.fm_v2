@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { store } from "../app/store";
 import { Provider } from "react-redux";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
+import theme from "../styles/theme";
 const client = new ApolloClient({
   uri: "https://spotify-fm-graphql.herokuapp.com/",
   cache: new InMemoryCache(),
@@ -11,7 +11,7 @@ const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <Component {...pageProps} />
