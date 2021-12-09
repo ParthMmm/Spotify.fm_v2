@@ -10,7 +10,8 @@ import CreatePlaylist from "../components/CreatePlaylist";
 const Create: NextPage = () => {
   return (
     <>
-      <CreatePlaylist />
+      {" "}
+      <CreatePlaylist />{" "}
     </>
   );
 };

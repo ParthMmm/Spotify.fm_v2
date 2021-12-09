@@ -71,7 +71,7 @@ const Form: NextPage = () => {
       .then((res) =>
         store.dispatch(codeSlice.actions.setToken(res.data.access_token))
       )
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(""));
   }, [code]);
   // if (code) {
   //   axios
@@ -84,7 +84,7 @@ const Form: NextPage = () => {
   //       store.dispatch(codeSlice.actions.setToken(res.data.access_token))
   //     );
   // }
-  console.log(code);
+  // console.log(code);
   return (
     <>
       <UserForm />

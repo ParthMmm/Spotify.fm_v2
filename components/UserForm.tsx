@@ -14,6 +14,8 @@ import {
   Radio,
   RadioGroup,
   Stack,
+  Link,
+  Select,
 } from "@chakra-ui/react";
 import { Formik, Field, Form } from "formik";
 import { store } from "../app/store";
@@ -23,21 +25,26 @@ import { useRouter } from "next/router";
 function UserForm() {
   const [value, setValue] = React.useState("1");
   const router = useRouter();
-  // const validate = (values) => {
-  //   const errors = {};
 
-  //   if (!values.rating) {
-  //     errors.rating = "required";
-  //   }
-  //   if (!values.title) {
-  //     errors.title = "required";
-  //   }
-  //   if (!values.reviewBody) {
-  //     errors.reviewBody = "required";
-  //   }
+  const validate = (values: any) => {
+    const errors: FormValues = {
+      username: "",
+      playlistName: "",
+      period: "",
+    };
 
-  //   return errors;
-  // };
+    if (!values.username) {
+      errors.username = "required";
+    }
+    if (!values.playlistName) {
+      errors.playlistName = "required";
+    }
+    if (!values.period) {
+      errors.period = "required";
+    }
+
+    return errors;
+  };
 
   interface FormValues {
     username: string;
@@ -53,108 +60,158 @@ function UserForm() {
   return (
     <>
       <Flex
-        justifyContent="center"
+        height="100vh"
+        w="100%"
         alignItems="center"
-        flexDir="column"
-        h="100vh"
+        justifyContent="center"
+        direction="column"
+        rounded="2xl"
+        shadow="2xl"
       >
-        <Heading>My Form</Heading>
-        <Formik
-          // validate={validate}
-          initialValues={initialValues}
-          onSubmit={(values, actions) => {
-            // console.log(values);
-            store.dispatch(formSlice.actions.setForm({ form: values }));
-            router.push("/create");
-            actions.resetForm({});
-          }}
+        <Flex
+          direction="column"
+          p={{ base: 8, md: 12 }}
+          rounded="xl"
+          shadow="2xl"
+          h={{ base: "60%", md: "50%" }}
+          w={{ base: "80%", md: "30%" }}
+          justifyContent="space-evenly"
+          bg="gray.700"
+
+          // bg={colorMode === "light" ? "#ECF0F1" : "#34495E"}
         >
-          <Form>
-            <Field name="username" type="number">
-              {({ field, form }) => (
-                <FormControl
-                  isInvalid={form.errors.username && form.touched.username}
-                >
-                  <Text> set last.fm username </Text>
+          <Flex alignItems="center" justifyContent="flex-start" mb={10}>
+            <Heading
+              // fontSize={{ base: "24px", md: "36px", lg: "48px" }}
 
-                  <Input
-                    {...field}
-                    id="username"
-                    placeholder="enter username"
-                  />
-                  <FormErrorMessage>{form.errors.username}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field name="playlistName">
-              {({ field, form }) => (
-                <FormControl
-                  isInvalid={
-                    form.errors.playlistName && form.touched.playlistName
-                  }
-                  mt={3}
-                >
-                  <Text> set playlist name </Text>
-
-                  <Input
-                    {...field}
-                    id="playlistName"
-                    placeholder="enter playlist name"
-                  />
-                  <FormErrorMessage>
-                    {form.errors.playlistName}
-                  </FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-
-            <Field name="period">
-              {({ field, form: { setFieldValue, errors, touched } }) => (
-                <FormControl isInvalid={errors.period && touched.period} mt={4}>
-                  <Text> set period </Text>
-                  <RadioGroup
-                    {...field}
-                    id="period"
-                    onChange={(value) => {
-                      setValue(value);
-                      setFieldValue("period", value);
-                    }}
-                    value={value}
+              bgGradient="linear(to-r, #2feaa8,#028cf3, #C779D0)"
+              bgClip="text"
+              _hover={{
+                bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
+              }}
+              // _hover={{
+              //   color: "purple.200",
+              // }}
+              fontSize="3rem"
+            >
+              spotify.fm
+            </Heading>
+          </Flex>
+          <Formik
+            // validate={validate}
+            initialValues={initialValues}
+            onSubmit={(values, actions) => {
+              console.log(values);
+              store.dispatch(formSlice.actions.setForm({ form: values }));
+              router.push("/create");
+              actions.resetForm({});
+            }}
+          >
+            <Form>
+              <Field name="username">
+                {({ field, form }) => (
+                  <FormControl
+                    isInvalid={form.errors.username && form.touched.username}
                   >
-                    <Stack direction="column">
-                      <Radio value="7day">7 days</Radio>
-                      <Radio value="1month">1 month</Radio>
-                      <Radio value="3month">3 months</Radio>
-                      <Radio value="6month">6 months</Radio>
-                      <Radio value="12month">12 months</Radio>
-                    </Stack>
-                  </RadioGroup>
-                  <FormErrorMessage>{errors.period}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+                    {/* <Text> set last.fm username </Text> */}
 
-            <Box d="flex" justifyContent="space-between" my={4}>
-              {" "}
-              <Button
-                // isLoading={action.loading}
-                type="submit"
-                bg="tomato"
-                rounded="xl"
-                size="md"
-                _hover={{ background: "purple.600" }}
-              >
-                <Text
-                  _hover={{ color: "tomato" }}
-                  fontSize="1rem"
-                  color="white"
+                    <Input
+                      {...field}
+                      id="username"
+                      placeholder="enter last.fm username"
+                      variant="flushed"
+                      mb={6}
+                    />
+                    <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              <Field name="playlistName">
+                {({ field, form }) => (
+                  <FormControl
+                    isInvalid={
+                      form.errors.playlistName && form.touched.playlistName
+                    }
+                  >
+                    {/* <Text> set playlist name </Text> */}
+
+                    <Input
+                      {...field}
+                      id="playlistName"
+                      placeholder="enter playlist name"
+                      variant="flushed"
+                      mb={8}
+                    />
+                    <FormErrorMessage>
+                      {form.errors.playlistName}
+                    </FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Field name="period">
+                {({ field, form: { setFieldValue, errors, touched } }) => (
+                  <FormControl isInvalid={errors.period && touched.period}>
+                    <Box
+                      d="flex"
+                      alignItems="baseline"
+                      justifyContent="space-between"
+                      flexFlow="row wrap"
+                      w="100%"
+                      mb={8}
+                    >
+                      <Text
+                        // as="span"
+                        // w="25%"
+                        fontWeight="500"
+                        text-align="left"
+                      >
+                        from the last
+                      </Text>
+                      <Select
+                        w="75%"
+                        // bg="tomato"
+                        // borderColor="tomato"
+                        variant="unstyled"
+                        color="green.400"
+                        size="2xl"
+                        fontWeight="500"
+                        onChange={(e) =>
+                          setFieldValue("period", e.target.value)
+                        }
+                        placeholder="time period"
+                      >
+                        <option value="7day">7 days</option>
+                        <option value="1month">1 month</option>
+                        <option value="3month">3 months</option>
+                        <option value="6month">6 months</option>
+                        <option value="12month">12 months</option>
+                      </Select>
+                    </Box>
+
+                    <FormErrorMessage>{errors.period}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Box float="right" mt={5}>
+                {" "}
+                <Button
+                  // isLoading={action.loading}
+                  type="submit"
+                  bg="green.400"
+                  rounded="xl"
+                  size="md"
+                  _hover={{ background: "green.600" }}
                 >
-                  submit
-                </Text>
-              </Button>
-            </Box>
-          </Form>
-        </Formik>
+                  <Text fontSize="1rem" color="white">
+                    submit
+                  </Text>
+                </Button>
+              </Box>
+            </Form>
+          </Formik>
+        </Flex>
       </Flex>
     </>
   );

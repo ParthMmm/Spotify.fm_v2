@@ -1,15 +1,24 @@
-import { Button, Link } from "@chakra-ui/react";
+import { Button, Link, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { redirectUrlToSpotifyForLogin } from "../utils/spotifyFunctions";
 import { store } from "../app/store";
+import { FaSpotify } from "react-icons/fa";
 function SpotifyLogin() {
   // console.log(redirectUrlToSpotifyForLogin());
   return (
-    <div>
-      <Button>
-        <Link href={redirectUrlToSpotifyForLogin()}>Spotify Login</Link>
-      </Button>
-    </div>
+    <>
+      <Link
+        href={redirectUrlToSpotifyForLogin()}
+        _hover={{ color: "green.400" }}
+      >
+        <Button>
+          <Icon as={FaSpotify} />
+          <Text as="span" ml={2}>
+            login with spotify
+          </Text>
+        </Button>
+      </Link>
+    </>
   );
 }
 
