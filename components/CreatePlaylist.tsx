@@ -61,6 +61,7 @@ function CreatePlaylist() {
   let playlist_url = "";
   const currDate = new Date().toLocaleString();
   const [success, setSuccess] = useState(false);
+  const [spotError, setSpotError] = useState(false);
   const { form } = useSelector((state: RootState) => state.form);
   const { code } = useSelector((state: RootState) => state.code);
   const { token } = useSelector((state: RootState) => state.code);
@@ -75,10 +76,10 @@ function CreatePlaylist() {
 
   const handleSpotify = () => {
     spotify.setAccessToken(token);
-    const songs = data.topTracks.map(
+    const songs: any = data?.topTracks.map(
       (song) => song.name + " " + song.artist.name
     );
-    songs.forEach((song) =>
+    songs.forEach((song: any) =>
       spotify
         .searchTracks(song, { limit: 1 })
         .then((res) => {
@@ -88,7 +89,7 @@ function CreatePlaylist() {
             failed.push(song);
           }
         })
-        .catch((err) => console.log("eer"))
+        .catch(() => setSpotError(true))
     );
 
     spotify
@@ -111,29 +112,44 @@ function CreatePlaylist() {
       .then(() => {
         spotify.addTracksToPlaylist(playlist_id, spot_uri);
       })
-      .then((res) => setSuccess(true))
-      .catch((err) => console.log(err));
+      .then(() => setSuccess(true))
+      .catch(() => setSpotError(true));
   };
 
   useEffect(() => {
     if (data) {
       handleSpotify();
     }
-    console.log("render");
+    console.log(playlist_url);
   }, [data]);
-
-  console.log(loading, error, data);
 
   if (loading) {
     return (
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        h="100vh"
-        flexDir="column"
-      >
-        <Spinner />
-      </Flex>
+      <>
+        <Flex
+          height="100vh"
+          w="100%"
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
+        >
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Spinner />
+          </Flex>
+        </Flex>
+      </>
     );
   }
 
@@ -141,38 +157,168 @@ function CreatePlaylist() {
     return (
       <>
         <Flex
-          justifyContent="center"
+          height="100vh"
+          w="100%"
           alignItems="center"
-          h="100vh"
-          flexDir="column"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
         >
-          <Alert status="error">
-            <AlertIcon />
-            <AlertTitle>Error</AlertTitle>
-            {/* <AlertDescription>{error.error}</AlertDescription> */}
-          </Alert>
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Alert status="error">
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+            </Alert>
+          </Flex>
+        </Flex>
+      </>
+    );
+  }
+  if (data && !error && !spotError && !success) {
+    return (
+      <>
+        <Flex
+          height="100vh"
+          w="100%"
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
+        >
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Heading>got your top tracks 🎉</Heading>
+            <Text>
+              🚧 now creating playlist {form.playlistName} and adding tracks
+            </Text>
+            <Spinner />
+          </Flex>
         </Flex>
       </>
     );
   }
   if (success) {
-    console.log(playlist_url);
     return (
       <>
         <Flex
-          justifyContent="center"
+          height="100vh"
+          w="100%"
           alignItems="center"
-          h="100vh"
-          flexDir="column"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
         >
-          <Text>success! 🎉</Text>
-          <Link href={playlist_url}>{playlist_url}</Link>
-          <Button onClick={() => router.push("/")}>go home</Button>
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Heading>success! 🎉</Heading>
+            <Text>
+              created playlist {form.playlistName} with period of {form.period}
+            </Text>
+            <Link href={playlist_url}>{playlist_url}</Link>
+            <Button onClick={() => router.push("/")}>go home</Button>
+          </Flex>
+        </Flex>
+      </>
+    );
+  }
+  if (spotError) {
+    return (
+      <>
+        <Flex
+          height="100vh"
+          w="100%"
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
+        >
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Alert status="error" rounded="2xl">
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                spotify error please try again{" "}
+                <Button onClick={() => router.push("/")}>go home</Button>
+              </AlertDescription>
+            </Alert>
+          </Flex>
         </Flex>
       </>
     );
   } else {
-    return <></>;
+    return (
+      <>
+        <Flex
+          height="100vh"
+          w="100%"
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+          rounded="2xl"
+          shadow="2xl"
+        >
+          <Flex
+            direction="column"
+            p={{ base: 8, md: 12 }}
+            rounded="xl"
+            shadow="2xl"
+            h={{ base: "60%", md: "60%" }}
+            w={{ base: "80%", md: "40%" }}
+            alignItems="center"
+            justifyContent="center"
+            bg="gray.700"
+          >
+            <Alert status="error" rounded="2xl">
+              <AlertIcon />
+              <AlertTitle>Error</AlertTitle>
+              {/* <AlertDescription>{error.error}</AlertDescription> */}
+            </Alert>
+          </Flex>
+        </Flex>
+      </>
+    );
   }
 }
 

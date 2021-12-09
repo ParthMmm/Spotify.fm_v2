@@ -5,45 +5,47 @@ import SpotifyLogin from "./SpotifyLogin";
 function Landing() {
   return (
     <>
-      <Flex
-        height="100vh"
-        w="100%"
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
-        rounded="2xl"
-        shadow="2xl"
-      >
-        <Flex
-          direction="column"
-          p={{ base: 8, md: 12 }}
-          rounded="xl"
-          shadow="2xl"
-          h={{ base: "60%", md: "60%" }}
-          w={{ base: "80%", md: "40%" }}
-          alignItems="center"
-          justifyContent="center"
-          bg="gray.700"
-        >
-          <Heading color="green.400" mb={20}>
-            spotify.fm playlists
-          </Heading>
-          <Text textAlign="center" fontSize={"1rem"} fontWeight={"400"} mb={5}>
-            generate spotify playlists from your last.fm scrobbles
-          </Text>
-          <SpotifyLogin />
-
-          <Text
-            textAlign="center"
-            fontSize={"1rem"}
-            fontWeight={"400"}
-            mb={5}
-            color={"gray.600"}
+      <Box direction="column">
+        <Flex justifyContent="flex-start" mb={10}>
+          {" "}
+          <Heading
+            bgGradient="linear(to-r, #2feaa8,#028cf3, #C779D0)"
+            bgClip="text"
+            _hover={{
+              bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
+            }}
+            fontSize="3rem"
           >
-            spotify and last.fm account required
-          </Text>
+            spotify.fm
+          </Heading>
         </Flex>
-      </Flex>
+
+        <Flex justifyContent={"center"} flexFlow={"column nowrap"} mt={48}>
+          {" "}
+          <Flex>
+            {" "}
+            <Text textAlign="center" fontSize="xl" fontWeight={"600"} mb={5}>
+              create spotify playlists from your last.fm scrobbles
+            </Text>
+          </Flex>
+          <Flex
+            justifyContent={"flex-end"}
+            alignItems="center"
+            flexDir={"column"}
+          >
+            {" "}
+            <SpotifyLogin />
+            <Text
+              mt={2}
+              fontSize={"1rem"}
+              fontWeight={"400"}
+              color={"gray.600"}
+            >
+              spotify and last.fm account required
+            </Text>
+          </Flex>
+        </Flex>
+      </Box>
     </>
   );
 }

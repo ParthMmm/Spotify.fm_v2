@@ -4,7 +4,6 @@ import { redirectUrlToSpotifyForLogin } from "../utils/spotifyFunctions";
 import { store } from "../app/store";
 import { FaSpotify } from "react-icons/fa";
 function SpotifyLogin() {
-  // console.log(redirectUrlToSpotifyForLogin());
   return (
     <>
       <Link
