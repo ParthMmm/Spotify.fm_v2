@@ -146,7 +146,7 @@ function CreatePlaylist() {
             justifyContent="center"
             bg="gray.700"
           >
-            <Spinner />
+            <Spinner color="green.400" />
           </Flex>
         </Flex>
       </>
@@ -212,7 +212,7 @@ function CreatePlaylist() {
             <Text>
               🚧 now creating playlist {form.playlistName} and adding tracks
             </Text>
-            <Spinner />
+            <Spinner color="green.400" />
           </Flex>
         </Flex>
       </>
@@ -241,8 +241,8 @@ function CreatePlaylist() {
             justifyContent="center"
             bg="gray.700"
           >
-            <Heading>success! 🎉</Heading>
-            <Text>
+            <Heading mb={4}>success! 🎉</Heading>
+            <Text mb={2}>
               created playlist {form.playlistName} with period of {form.period}
             </Text>
             <Link href={playlist_url}>{playlist_url}</Link>
@@ -313,6 +313,8 @@ function CreatePlaylist() {
             <Alert status="error" rounded="2xl">
               <AlertIcon />
               <AlertTitle>Error</AlertTitle>
+              <Button onClick={() => router.push("/")}>go home</Button>
+
               {/* <AlertDescription>{error.error}</AlertDescription> */}
             </Alert>
           </Flex>

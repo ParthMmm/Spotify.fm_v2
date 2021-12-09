@@ -18,7 +18,6 @@ export const formSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     setForm: (state, { payload }: PayloadAction<FormState>) => {
-      console.log(payload);
       state.form = payload.form;
     },
   },

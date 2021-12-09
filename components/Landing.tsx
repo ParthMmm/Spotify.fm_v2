@@ -5,7 +5,7 @@ import SpotifyLogin from "./SpotifyLogin";
 function Landing() {
   return (
     <>
-      <Box direction="column">
+      <Box w="100%">
         <Flex justifyContent="flex-start" mb={10}>
           {" "}
           <Heading
@@ -20,30 +20,19 @@ function Landing() {
           </Heading>
         </Flex>
 
-        <Flex justifyContent={"center"} flexFlow={"column nowrap"} mt={48}>
-          {" "}
-          <Flex>
-            {" "}
-            <Text textAlign="center" fontSize="xl" fontWeight={"600"} mb={5}>
-              create spotify playlists from your last.fm scrobbles
-            </Text>
-          </Flex>
-          <Flex
-            justifyContent={"flex-end"}
-            alignItems="center"
-            flexDir={"column"}
-          >
-            {" "}
-            <SpotifyLogin />
-            <Text
-              mt={2}
-              fontSize={"1rem"}
-              fontWeight={"400"}
-              color={"gray.600"}
-            >
-              spotify and last.fm account required
-            </Text>
-          </Flex>
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDir={"column"}
+          mt={48}
+        >
+          <Text textAlign="center" fontSize="xl" fontWeight={"600"} mb={5}>
+            create spotify playlists from your last.fm scrobbles
+          </Text>
+          <SpotifyLogin />
+          <Text mt={2} fontSize={"1rem"} fontWeight={"400"} color={"gray.600"}>
+            spotify and last.fm account required
+          </Text>
         </Flex>
       </Box>
     </>

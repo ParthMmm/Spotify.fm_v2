@@ -1,4 +1,4 @@
-import { Button, Link, Icon, Text } from "@chakra-ui/react";
+import { Flex, Button, Link, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { redirectUrlToSpotifyForLogin } from "../utils/spotifyFunctions";
 import { store } from "../app/store";
