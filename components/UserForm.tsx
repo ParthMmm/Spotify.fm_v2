@@ -3,18 +3,11 @@ import {
   Button,
   Flex,
   Text,
-  FormLabel,
   FormErrorMessage,
   FormControl,
   Input,
-  useColorMode,
-  Textarea,
   Heading,
   Box,
-  Radio,
-  RadioGroup,
-  Stack,
-  Link,
   Select,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -43,7 +36,6 @@ const validationSchema = Yup.object().shape({
 });
 
 function UserForm() {
-  // const [value, setValue] = useState("1");
   const router = useRouter();
   const {
     register,
@@ -65,7 +57,6 @@ function UserForm() {
     router.push("/create");
     reset();
   };
-  console.log(errors);
   return (
     <>
       <Flex

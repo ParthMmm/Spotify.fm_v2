@@ -16,9 +16,6 @@
     "@reduxjs/toolkit": "^1.6.2",
     "@types/qs": "^6.9.7",
     "axios": "^0.24.0",
-    "crypto-js": "^4.1.1",
-    "date-fns": "^2.27.0",
-    "formik": "^2.2.9",
     "framer-motion": "^4",
     "graphql": "^16.0.1",
     "next": "12.0.7",
@@ -31,7 +28,6 @@
     "react-spring": "^9.3.2",
     "request": "^2.88.2",
     "spotify-web-api-js": "^1.5.2",
-    "swr": "^1.1.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
