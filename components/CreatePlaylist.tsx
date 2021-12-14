@@ -18,6 +18,7 @@ import {
 import SpotifyWebApi from "spotify-web-api-js";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { pageSlice } from "../app/pageSlice";
 interface TopTracks {
   name: string;
   artist: { name: string };
@@ -73,6 +74,11 @@ function CreatePlaylist() {
       variables: { username: form.username, period: form.period },
     }
   );
+
+  const goHome = () => {
+    router.push("/");
+    store.dispatch(pageSlice.actions.setPage("landing"));
+  };
 
   const handleSpotify = () => {
     spotify.setAccessToken(token);
@@ -246,7 +252,7 @@ function CreatePlaylist() {
               created playlist {form.playlistName} with period of {form.period}
             </Text>
             <Link href={playlist_url}>{playlist_url}</Link>
-            <Button onClick={() => router.push("/")}>go home</Button>
+            <Button onClick={() => goHome()}>go home</Button>
           </Flex>
         </Flex>
       </>
@@ -280,7 +286,7 @@ function CreatePlaylist() {
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>
                 spotify error please try again{" "}
-                <Button onClick={() => router.push("/")}>go home</Button>
+                <Button onClick={() => goHome()}>go home</Button>
               </AlertDescription>
             </Alert>
           </Flex>
@@ -313,7 +319,7 @@ function CreatePlaylist() {
             <Alert status="error" rounded="2xl">
               <AlertIcon />
               <AlertTitle>Error</AlertTitle>
-              <Button onClick={() => router.push("/")}>go home</Button>
+              <Button onClick={() => goHome()}>go home</Button>
 
               {/* <AlertDescription>{error.error}</AlertDescription> */}
             </Alert>

@@ -1,12 +1,14 @@
 import { configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { codeSlice } from "./codeSlice";
 import { formSlice } from "./formSlice";
+import { pageSlice } from "./pageSlice";
 // ...
 
 export const store = configureStore({
   reducer: {
     code: codeSlice.reducer,
     form: formSlice.reducer,
+    page: pageSlice.reducer,
   },
 });
 
