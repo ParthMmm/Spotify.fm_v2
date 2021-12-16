@@ -1,11 +1,13 @@
 import React from "react";
-import { Text, Flex, Heading, Box } from "@chakra-ui/react";
+import { Text, Flex, Heading, Box, Link } from "@chakra-ui/react";
 import useBoop from "../../utils/useBoop";
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 function HeadingTitle() {
+  const router = useRouter();
   const boopConfig = {
     x: 0,
     y: 0,
@@ -30,14 +32,14 @@ function HeadingTitle() {
   });
 
   const { page } = useSelector((state: RootState) => state.page);
-
+  console.log(page);
   if (page === "form") {
     let styles = useSpring({
       config: { mass: 6, tension: 300, friction: 40 },
       to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
       from: {
         opacity: 0,
-        transform: "translate(0px, -100px)",
+        transform: "translate(-100px, 0px)",
         scale: "1",
       },
       height: 0,
@@ -74,7 +76,8 @@ function HeadingTitle() {
             }}
             fontSize="4rem"
           >
-            spotify.fm
+            <Link onClick={() => router.push("/")}> spotify.fm</Link>
+            {/* spotify.fm */}
           </Heading>
         </animated.div>
       </Flex>

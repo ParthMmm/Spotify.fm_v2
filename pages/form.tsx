@@ -47,8 +47,10 @@ const Form: NextPage = () => {
         headers
       )
       .then((res) => {
-        store.dispatch(codeSlice.actions.setToken(res.data.access_token));
+        console.log(res);
         store.dispatch(pageSlice.actions.setPage("form"));
+        store.dispatch(codeSlice.actions.setToken(res.data.access_token));
+        // store.dispatch(pageSlice.actions.setPage("form"));
       })
       .catch((err) => doNothing()); //do nothing spotify api is weird
   }, [code]);

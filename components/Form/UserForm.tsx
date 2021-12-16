@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Flex,
@@ -10,8 +10,10 @@ import {
   Box,
   Select,
   Stack,
+  VStack,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import useBoop from "../../utils/useBoop";
 
 import { store } from "../../app/store";
 import { formSlice } from "../../app/formSlice";
@@ -63,12 +65,74 @@ function UserForm() {
     router.push("/create");
     reset();
   };
+
+  const boopConfig = {
+    x: 0,
+    y: 0,
+    rotation: 0,
+    scale: 1.1,
+    timing: 150,
+    springConfig: {
+      mass: 1,
+      tension: 250,
+      friction: 10,
+    },
+  };
+  const [style, setIsBooped] = useBoop(boopConfig);
+
+  const buttonStyle = useSpring({
+    config: { mass: 2, tension: 275, friction: 20 },
+    to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
+    from: {
+      opacity: 0,
+      transform: "translate(0px,0px)",
+      scale: "0.1",
+    },
+    height: 0,
+    delay: 1300,
+  });
+
+  const optionsStyle = useSpring({
+    config: { mass: 2, tension: 275, friction: 20 },
+    to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
+    from: {
+      opacity: 0,
+      transform: "translate(0px,-100px)",
+      scale: "1",
+    },
+    height: 0,
+    delay: 1300,
+  });
+
+  const inputsStyle = useSpring({
+    config: { mass: 2, tension: 275, friction: 20 },
+    to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
+    from: {
+      opacity: 0,
+      transform: "translate(-100px,0px)",
+      scale: "1",
+    },
+    height: 0,
+    delay: 600,
+  });
+
+  const [show, set] = useState(true);
+
+  const transitions = useTransition(0, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    delay: 1900,
+    expires: 2,
+    onRest: () => set(!show),
+    // expires: 2000,
+  });
+
   return (
     <>
-      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-      <Trail>
-        <Flex flexDir="column" alignItems={"center"}>
-          <FormControl isInvalid={Boolean(errors?.username)} mb={6} mx={36}>
+      <Flex flexDir="column" alignItems={"center"}>
+        <FormControl isInvalid={Boolean(errors?.username)} mb={6} mx={36}>
+          <animated.div style={inputsStyle}>
             <Input
               type="username"
               id="username"
@@ -76,9 +140,12 @@ function UserForm() {
               variant="flushed"
               {...register("username")}
             />
-            <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={Boolean(errors?.playlistName)} mb={8}>
+          </animated.div>
+
+          <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={Boolean(errors?.playlistName)} mb={8}>
+          <animated.div style={inputsStyle}>
             <Input
               type="name"
               id="playlistName"
@@ -86,9 +153,12 @@ function UserForm() {
               variant="flushed"
               {...register("playlistName")}
             />
-            <FormErrorMessage>{errors.playlistName?.message}</FormErrorMessage>
-          </FormControl>
-          <FormControl isInvalid={Boolean(errors?.period)} mb={8}>
+          </animated.div>
+
+          <FormErrorMessage>{errors.playlistName?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={Boolean(errors?.period)} mb={8}>
+          <animated.div style={inputsStyle}>
             <Box
               d="flex"
               alignItems="baseline"
@@ -104,6 +174,7 @@ function UserForm() {
               >
                 from the last
               </Text>
+
               <Select
                 w="75%"
                 // bg="tomato"
@@ -122,28 +193,63 @@ function UserForm() {
                 <option value="6month">6 months</option>
                 <option value="12month">12 months</option>
               </Select>
-            </Box>
 
-            <FormErrorMessage>{errors.period?.message}</FormErrorMessage>
-          </FormControl>
-          <Box float="right" mt={5}>
+              {/* {transitions(({ opacity }) => (
+                <animated.div
+                  style={{
+                    opacity: opacity.to({ range: [0.0, 1.0], output: [1, 0] }),
+                  }}
+                >
+                  <Trail>
+                    <Text color="green.400" size="2xl" fontWeight="500">
+                      7 days
+                    </Text>
+                    <Text color="green.400" size="2xl" fontWeight="500">
+                      1 month
+                    </Text>
+                    <Text color="green.400" size="2xl" fontWeight="500">
+                      3 months
+                    </Text>
+                    <Text color="green.400" size="2xl" fontWeight="500">
+                      6 months
+                    </Text>
+                    <Text color="green.400" size="2xl" fontWeight="500">
+                      12 months
+                    </Text>
+                  </Trail>
+                </animated.div>
+              ))} */}
+            </Box>
+          </animated.div>
+
+          <FormErrorMessage>{errors.period?.message}</FormErrorMessage>
+        </FormControl>
+        <animated.div style={buttonStyle}>
+          <Box float="right" mt={10}>
             {" "}
-            <Button
-              // isLoading={action.loading}
-              onClick={handleSubmit(onSubmit)}
-              type="submit"
-              bg="green.400"
-              rounded="xl"
-              size="md"
-              _hover={{ background: "green.600" }}
+            <animated.div
+              onMouseEnter={() => setIsBooped(true)}
+              onMouseLeave={() => setIsBooped(false)}
+              style={style}
             >
-              <Text fontSize="1rem" color="white">
-                submit
-              </Text>
-            </Button>
+              <Button
+                // isLoading={action.loading}
+
+                onClick={handleSubmit(onSubmit)}
+                type="submit"
+                bg="green.400"
+                rounded="xl"
+                size="md"
+                _hover={{ background: "green.600" }}
+              >
+                <Text fontSize="1rem" color="white">
+                  submit
+                </Text>
+              </Button>
+            </animated.div>
           </Box>
-        </Flex>
-      </Trail>
+        </animated.div>
+      </Flex>
     </>
   );
 }
@@ -153,17 +259,20 @@ const Trail = ({ children }) => {
   console.log(items.length);
   const trail = useTrail(items.length, {
     config: { mass: 1, tension: 60, friction: 10 },
-    to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
+    to: { opacity: 1, transform: "translate(125px, 0px)", scale: "1" },
     from: {
       opacity: 0,
-      transform: "translate(-100px,0px)",
+      transform: "translate(125px,-400px)",
       scale: "1",
     },
+    leave: {
+      opacity: 0,
+    },
     height: 0,
-    delay: 350,
+    delay: 0,
   });
   return (
-    <Stack direction="row" spacing="8px" mb={4}>
+    <Stack direction="column" spacing="8px" mb={4} z-Index={2}>
       {trail.map(({ height, ...style }, index) => (
         <a.div key={index} style={style}>
           <a.div style={{ height }}>{items[index]}</a.div>

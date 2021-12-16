@@ -30,6 +30,7 @@ function MainCard() {
           w="100%"
           alignItems="center"
           justifyContent="center"
+          // borderColor={"#2feaa8"}
           // direction="column"
         >
           <animated.div style={styles}>

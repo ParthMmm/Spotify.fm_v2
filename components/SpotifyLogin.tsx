@@ -20,7 +20,7 @@ function SpotifyLogin() {
     },
   };
   const style2 = useSpring({
-    config: { mass: 2, tension: 200, friction: 30 },
+    config: { mass: 2, tension: 275, friction: 20 },
     to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
     from: {
       opacity: 0,
