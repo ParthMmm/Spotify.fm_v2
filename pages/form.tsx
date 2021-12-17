@@ -1,13 +1,18 @@
-import { Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Spinner, Text, Flex } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { codeSlice } from "../app/codeSlice";
 import { store, RootState } from "../app/store";
-import UserForm from "../components/UserForm";
+import UserForm from "../components/Form/UserForm";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import qs from "qs";
 import { useEffect } from "react";
+import { pageSlice } from "../app/pageSlice";
+import FormCard from "../components/Form/FormCard";
+import Card from "../components/Form/Card";
+import Loader from "../components/Loader";
 const Form: NextPage = () => {
   const router = useRouter();
   let error = "";
@@ -16,6 +21,9 @@ const Form: NextPage = () => {
     store.dispatch(codeSlice.actions.setCode(code));
   }
   const doNothing = () => {};
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const headers = {
     headers: {
@@ -37,23 +45,47 @@ const Form: NextPage = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     axios
       .post(
         "https://accounts.spotify.com/api/token",
         qs.stringify(data),
         headers
       )
-      .then((res) =>
-        store.dispatch(codeSlice.actions.setToken(res.data.access_token))
-      )
+      .then((res) => {
+        store.dispatch(pageSlice.actions.setPage("form"));
+        store.dispatch(codeSlice.actions.setToken(res.data.access_token));
+        if (res.data.access_token) {
+          setSuccess(true);
+          setLoading(false);
+        }
+        // store.dispatch(pageSlice.actions.setPage("form"));
+      })
       .catch((err) => doNothing()); //do nothing spotify api is weird
   }, [code]);
 
-  return (
-    <>
-      <UserForm />
-    </>
-  );
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
+
+  if (success) {
+    return (
+      <>
+        <Card />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 };
 
 export default Form;

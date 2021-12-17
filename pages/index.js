@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import Landing from "../components/Landing";
-import MainCard from "../components/MainCard";
-const Home: NextPage = () => {
+import { store, RootState } from "../app/store";
+import { configureStore, PayloadAction, createStore } from "@reduxjs/toolkit";
+
+import MainCard from "../components/Landing/MainCard";
+function Home() {
   return (
     <>
       <Head>
@@ -15,6 +15,6 @@ const Home: NextPage = () => {
       <footer></footer>
     </>
   );
-};
+}
 
 export default Home;
