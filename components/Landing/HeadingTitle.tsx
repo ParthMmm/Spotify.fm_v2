@@ -2,9 +2,10 @@ import React from "react";
 import { Text, Flex, Heading, Box, Link } from "@chakra-ui/react";
 import useBoop from "../../utils/useBoop";
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
-import { RootState } from "../../app/store";
+import { RootState, store } from "../../app/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { pageSlice } from "../../app/pageSlice";
 
 function HeadingTitle() {
   const router = useRouter();
@@ -20,7 +21,22 @@ function HeadingTitle() {
     },
   };
 
-  let styles = useSpring({
+  const { page } = useSelector((state: RootState) => state.page);
+  const { token } = useSelector((state: RootState) => state.code);
+
+  const titleStyleForm = useSpring({
+    config: { mass: 6, tension: 300, friction: 40 },
+    to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
+    from: {
+      opacity: 0,
+      transform: "translate(-300px, 0px)",
+      scale: "1",
+    },
+    height: 0,
+    delay: 200,
+  });
+
+  const titleStyleLanding = useSpring({
     config: { mass: 6, tension: 300, friction: 40 },
     to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
     from: {
@@ -31,58 +47,75 @@ function HeadingTitle() {
     height: 0,
   });
 
-  const { page } = useSelector((state: RootState) => state.page);
-  console.log(page);
-  if (page === "form") {
-    let styles = useSpring({
-      config: { mass: 6, tension: 300, friction: 40 },
-      to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
-      from: {
-        opacity: 0,
-        transform: "translate(-100px, 0px)",
-        scale: "1",
-      },
-      height: 0,
-    });
-  } else {
-    let styles = useSpring({
-      config: { mass: 6, tension: 300, friction: 40 },
-      to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
-      from: {
-        opacity: 0,
-        transform: "translate(0px, -100px)",
-        scale: "3",
-      },
-      height: 0,
-    });
-  }
-
   const [style, setIsBooped] = useBoop(boopConfig);
-
-  return (
-    <animated.div style={styles}>
-      <Flex justifyContent="center">
-        {" "}
-        <animated.div
-          onMouseEnter={() => setIsBooped(true)}
-          onMouseLeave={() => setIsBooped(false)}
-          style={style}
-        >
-          <Heading
-            bgGradient="linear(to-r, #2feaa8,#028cf3, #C779D0)"
-            bgClip="text"
-            _hover={{
-              bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
-            }}
-            fontSize="4rem"
+  if (token || page === "form") {
+    return (
+      <animated.div style={titleStyleForm}>
+        <Flex justifyContent="center">
+          {" "}
+          <animated.div
+            onMouseEnter={() => setIsBooped(true)}
+            onMouseLeave={() => setIsBooped(false)}
+            style={style}
           >
-            <Link onClick={() => router.push("/")}> spotify.fm</Link>
-            {/* spotify.fm */}
-          </Heading>
-        </animated.div>
-      </Flex>
-    </animated.div>
-  );
+            <Heading
+              bgGradient="linear(to-r, #2feaa8,#028cf3, #C779D0)"
+              bgClip="text"
+              _hover={{
+                bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
+              }}
+              fontSize="4rem"
+            >
+              <Link
+                onClick={() => {
+                  router.push("/");
+                  store.dispatch(pageSlice.actions.setPage("landing"));
+                }}
+              >
+                {" "}
+                spotify.fm
+              </Link>
+              {/* spotify.fm */}
+            </Heading>
+          </animated.div>
+        </Flex>
+      </animated.div>
+    );
+  }
+  if (page === "landing" && !token) {
+    return (
+      <animated.div style={titleStyleLanding}>
+        <Flex justifyContent="center">
+          {" "}
+          <animated.div
+            onMouseEnter={() => setIsBooped(true)}
+            onMouseLeave={() => setIsBooped(false)}
+            style={style}
+          >
+            <Heading
+              bgGradient="linear(to-r, #2feaa8,#028cf3, #C779D0)"
+              bgClip="text"
+              _hover={{
+                bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
+              }}
+              fontSize="4rem"
+            >
+              <Link
+                onClick={() => {
+                  router.push("/");
+                  store.dispatch(pageSlice.actions.setPage("landing"));
+                }}
+              >
+                {" "}
+                spotify.fm
+              </Link>
+              {/* spotify.fm */}
+            </Heading>
+          </animated.div>
+        </Flex>
+      </animated.div>
+    );
+  }
 }
 
 export default HeadingTitle;

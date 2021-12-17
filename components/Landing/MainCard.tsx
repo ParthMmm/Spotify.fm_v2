@@ -22,59 +22,22 @@ function MainCard() {
     height: 0,
   });
 
-  if (page === "landing") {
-    return (
-      <>
-        <Flex
-          height="100vh"
-          w="100%"
-          alignItems="center"
-          justifyContent="center"
-          // borderColor={"#2feaa8"}
-          // direction="column"
-        >
-          <animated.div style={styles}>
-            <Landing />
-          </animated.div>
-        </Flex>
-      </>
-    );
-  }
-
-  if (page === "form") {
-    return (
-      <>
-        <Flex
-          height="100vh"
-          w="100%"
-          alignItems="center"
-          justifyContent="center"
-          // direction="column"
-        >
-          <animated.div style={styles}>
-            <UserForm />
-          </animated.div>
-        </Flex>
-      </>
-    );
-  }
-  if (page === "create") {
-    return (
-      <>
-        <Flex
-          height="100vh"
-          w="100%"
-          alignItems="center"
-          justifyContent="center"
-          // direction="column"
-        >
-          <animated.div style={styles}>
-            <CreatePlaylist />
-          </animated.div>
-        </Flex>
-      </>
-    );
-  }
+  return (
+    <>
+      <Flex
+        height="100vh"
+        w="100%"
+        alignItems="center"
+        justifyContent="center"
+        // borderColor={"#2feaa8"}
+        // direction="column"
+      >
+        <animated.div style={styles}>
+          <Landing />
+        </animated.div>
+      </Flex>
+    </>
+  );
 }
 
 export default MainCard;

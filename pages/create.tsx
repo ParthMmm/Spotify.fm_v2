@@ -5,7 +5,7 @@ import { codeSlice } from "../app/codeSlice";
 import { store, RootState } from "../app/store";
 import UserForm from "../components/Form/UserForm";
 import { useSelector } from "react-redux";
-import CreatePlaylist from "../components/CreatePlaylist";
+import CreatePlaylist from "../components/Create/CreatePlaylist";
 
 const Create: NextPage = () => {
   return (

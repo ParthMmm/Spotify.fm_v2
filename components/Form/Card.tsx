@@ -3,17 +3,17 @@ import { Text, Flex, Heading, Box } from "@chakra-ui/react";
 
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 import { useSelector } from "react-redux";
-import CreatePlaylist from "../CreatePlaylist";
+import CreatePlaylist from "../Create/CreatePlaylist";
 import FormCard from "./FormCard";
 
 function Card() {
   const styles = useSpring({
-    config: { mass: 8, tension: 1000, friction: 500, duration: 250 },
+    config: { mass: 8, tension: 300, friction: 40 },
     to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1.0" },
     from: {
       opacity: 0,
       transform: "translate(0px, 0px)",
-      scale: "1.0",
+      scale: "1",
     },
     height: 0,
   });

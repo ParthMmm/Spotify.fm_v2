@@ -89,7 +89,7 @@ function UserForm() {
       scale: "0.1",
     },
     height: 0,
-    delay: 1300,
+    delay: 1500,
   });
 
   const optionsStyle = useSpring({
@@ -101,7 +101,7 @@ function UserForm() {
       scale: "1",
     },
     height: 0,
-    delay: 1300,
+    delay: 1500,
   });
 
   const inputsStyle = useSpring({
@@ -113,7 +113,7 @@ function UserForm() {
       scale: "1",
     },
     height: 0,
-    delay: 600,
+    delay: 800,
   });
 
   const [show, set] = useState(true);
