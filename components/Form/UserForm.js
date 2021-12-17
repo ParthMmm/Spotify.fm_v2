@@ -24,12 +24,12 @@ import HeadingTitle from "../Landing/HeadingTitle";
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 import { pageSlice } from "../../app/pageSlice";
 
-interface FormValues {
-  username: string;
-  playlistName: string;
-  period: string;
-}
-const initialValues: FormValues = {
+// interface FormValues {
+//   username: string;
+//   playlistName: string;
+//   period: string;
+// }
+const initialValues = {
   username: "",
   playlistName: "",
   period: "",
@@ -48,15 +48,11 @@ function UserForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = ({
-    username,
-    playlistName,
-    period,
-  }) => {
+  const onSubmit = ({ username, playlistName, period }) => {
     store.dispatch(
       formSlice.actions.setForm({ form: { username, playlistName, period } })
     );
@@ -89,7 +85,7 @@ function UserForm() {
       scale: "0.1",
     },
     height: 0,
-    delay: 1500,
+    delay: 1300,
   });
 
   const optionsStyle = useSpring({
@@ -101,7 +97,7 @@ function UserForm() {
       scale: "1",
     },
     height: 0,
-    delay: 1500,
+    delay: 1300,
   });
 
   const inputsStyle = useSpring({
@@ -113,7 +109,7 @@ function UserForm() {
       scale: "1",
     },
     height: 0,
-    delay: 800,
+    delay: 600,
   });
 
   const [show, set] = useState(true);
@@ -256,7 +252,6 @@ function UserForm() {
 
 const Trail = ({ children }) => {
   const items = React.Children.toArray(children);
-  console.log(items.length);
   const trail = useTrail(items.length, {
     config: { mass: 1, tension: 60, friction: 10 },
     to: { opacity: 1, transform: "translate(125px, 0px)", scale: "1" },

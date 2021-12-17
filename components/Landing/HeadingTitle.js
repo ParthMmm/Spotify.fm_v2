@@ -21,8 +21,8 @@ function HeadingTitle() {
     },
   };
 
-  const { page } = useSelector((state: RootState) => state.page);
-  const { token } = useSelector((state: RootState) => state.code);
+  const { page } = useSelector((RootState) => RootState.page);
+  const { token } = useSelector((RootState) => RootState.code);
 
   const titleStyleForm = useSpring({
     config: { mass: 6, tension: 300, friction: 40 },
@@ -116,6 +116,7 @@ function HeadingTitle() {
       </animated.div>
     );
   }
+  return <></>;
 }
 
 export default HeadingTitle;

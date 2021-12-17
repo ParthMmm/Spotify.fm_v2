@@ -83,7 +83,6 @@ function MainContent() {
 
 const Trail = ({ children }) => {
   const items = React.Children.toArray(children);
-  console.log(items.length);
   const trail = useTrail(items.length, {
     config: { mass: 1, tension: 60, friction: 10 },
     to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },
@@ -114,7 +113,6 @@ const Trail = ({ children }) => {
 
 const Trail2 = ({ children }) => {
   const items = React.Children.toArray(children);
-  console.log(items.length);
   const trail = useTrail(items.length, {
     config: { mass: 1, tension: 60, friction: 10 },
     to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },

@@ -6,7 +6,6 @@ import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 function SubText() {
   const Trail2 = ({ children }) => {
     const items = React.Children.toArray(children);
-    console.log(items.length);
     const trail = useTrail(items.length, {
       config: { mass: 1, tension: 60, friction: 10 },
       to: { opacity: 1, transform: "translate(0px, 0px)", scale: "1" },

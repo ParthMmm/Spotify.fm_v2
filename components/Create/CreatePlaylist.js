@@ -25,26 +25,26 @@ import Loader from "../Loader";
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 import useBoop from "../../utils/useBoop";
 
-interface TopTracks {
-  name: string;
-  artist: { name: string };
-  playcount: number;
-}
+// interface TopTracks {
+//   name: string;
+//   artist: { name: string };
+//   playcount: number;
+// }
 
-interface TopTracksData {
-  topTracks: TopTracks[];
-}
+// interface TopTracksData {
+//   topTracks: TopTracks[];
+// }
 
-interface TopTracksVars {
-  username: string;
-  period: string;
-}
+// interface TopTracksVars {
+//   username: string;
+//   period: string;
+// }
 
-interface Form {
-  username: string;
-  period: string;
-  playlistName: string;
-}
+// interface Form {
+//   username: string;
+//   period: string;
+//   playlistName: string;
+// }
 
 const TOP_TRACKS = gql`
   query topTracks($username: String!, $period: String!) {
@@ -61,8 +61,8 @@ const TOP_TRACKS = gql`
 function CreatePlaylist() {
   const router = useRouter();
 
-  let spot_uri: any = [];
-  let failed: any = [];
+  let spot_uri = [];
+  let failed = [];
   let user_id = "";
   let playlist_id = "";
   let playlist_url = "";
@@ -70,17 +70,14 @@ function CreatePlaylist() {
   const [success, setSuccess] = useState(false);
   const [spotError, setSpotError] = useState(false);
   const [playlistURL, setPlaylistURL] = useState("");
-  const { form } = useSelector((state: RootState) => state.form);
-  const { code } = useSelector((state: RootState) => state.code);
-  const { token } = useSelector((state: RootState) => state.code);
+  const { form } = useSelector((RootState) => RootState.form);
+  const { code } = useSelector((RootState) => RootState.code);
+  const { token } = useSelector((RootState) => RootState.code);
   var spotify = new SpotifyWebApi();
 
-  const { loading, error, data } = useQuery<TopTracksData, TopTracksVars>(
-    TOP_TRACKS,
-    {
-      variables: { username: form.username, period: form.period },
-    }
-  );
+  const { loading, error, data } = useQuery(TOP_TRACKS, {
+    variables: { username: form.username, period: form.period },
+  });
 
   const boopConfig = {
     x: 0,
@@ -103,10 +100,10 @@ function CreatePlaylist() {
 
   const handleSpotify = () => {
     spotify.setAccessToken(token);
-    const songs: any = data?.topTracks.map(
+    const songs = data?.topTracks.map(
       (song) => song.name + " " + song.artist.name
     );
-    songs.forEach((song: any) =>
+    songs.forEach((song) =>
       spotify
         .searchTracks(song, { limit: 1 })
         .then((res) => {
@@ -135,7 +132,6 @@ function CreatePlaylist() {
       .then((res) => {
         setPlaylistURL(res.external_urls.spotify);
         playlist_id = res.id;
-        console.log(playlist_url);
       })
       .then(() => {
         spotify.addTracksToPlaylist(playlist_id, spot_uri);
@@ -180,16 +176,11 @@ function CreatePlaylist() {
               shadow="2xl"
               border="12px solid"
               borderColor={"#2feaa8"}
-              // p={[8, 8, 24]}
-              // h="100%"
-              // w="100%"
               bg="gray.700"
             >
               <Flex
                 rounded="xl"
                 shadow="2xl"
-                // h={{ base: "80%", md: "100%" }}
-                // w={{ base: "80%", md: "100%" }}
                 bg="gray.700"
                 flexDir={"column"}
                 justifyContent={"space-between"}
@@ -212,7 +203,6 @@ function CreatePlaylist() {
     );
   }
   if (success) {
-    console.log(playlist_url);
     return (
       <>
         <Flex
@@ -226,16 +216,11 @@ function CreatePlaylist() {
             shadow="2xl"
             border="12px solid"
             borderColor={"#2feaa8"}
-            // p={[8, 8, 24]}
-            // h="100%"
-            // w="100%"
             bg="gray.700"
           >
             <Flex
               rounded="xl"
               shadow="2xl"
-              // h={{ base: "80%", md: "100%" }}
-              // w={{ base: "80%", md: "100%" }}
               bg="gray.700"
               flexDir={"column"}
               justifyContent={"space-between"}
@@ -251,6 +236,9 @@ function CreatePlaylist() {
                     href={playlistURL}
                     pr={1}
                     color="green.400"
+                    textDecoration="underline"
+                    textD
+                    textDecorationThickness={"5px"}
                     _hover={{ color: "green.500" }}
                   >
                     {form.playlistName}

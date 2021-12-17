@@ -26,20 +26,7 @@ function useBoop({
          scale(1)`,
     config: springConfig,
   });
-  //   React.useEffect(() => {
-  //     if (!isBooped) {
-  //       return;
-  //     }
-  //     const timeoutId = window.setTimeout(() => {
-  //       setIsBooped(false);
-  //     }, timing);
-  //     return () => {
-  //       window.clearTimeout(timeoutId);
-  //     };
-  //   }, [isBooped]);
-  //   const trigger = React.useCallback(() => {
-  //     setIsBooped(true);
-  //   }, []);
+
   let appliedStyle = style;
   return [appliedStyle, setIsBooped];
 }

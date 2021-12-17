@@ -2,8 +2,6 @@ import React from "react";
 import { Text, Flex, Heading, Box } from "@chakra-ui/react";
 
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
-import { useSelector } from "react-redux";
-import CreatePlaylist from "../Create/CreatePlaylist";
 import FormCard from "./FormCard";
 
 function Card() {

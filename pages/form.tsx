@@ -54,7 +54,6 @@ const Form: NextPage = () => {
         headers
       )
       .then((res) => {
-        console.log(res);
         store.dispatch(pageSlice.actions.setPage("form"));
         store.dispatch(codeSlice.actions.setToken(res.data.access_token));
         if (res.data.access_token) {
