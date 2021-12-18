@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
-import { store, RootState } from "../../app/store";
+import { store } from "../../app/store";
 import {
   Text,
   Flex,
   Heading,
   Spinner,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Box,
   Link,
   VStack,
   Button,
 } from "@chakra-ui/react";
 import SpotifyWebApi from "spotify-web-api-js";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { pageSlice } from "../../app/pageSlice";
 import Error from "../Error";
 import Loader from "../Loader";
-import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
+import { animated } from "react-spring";
 import useBoop from "../../utils/useBoop";
 
 // interface TopTracks {
@@ -65,13 +59,12 @@ function CreatePlaylist() {
   let failed = [];
   let user_id = "";
   let playlist_id = "";
-  let playlist_url = "";
+
   const currDate = new Date().toLocaleString();
   const [success, setSuccess] = useState(false);
   const [spotError, setSpotError] = useState(false);
   const [playlistURL, setPlaylistURL] = useState("");
   const { form } = useSelector((RootState) => RootState.form);
-  const { code } = useSelector((RootState) => RootState.code);
   const { token } = useSelector((RootState) => RootState.code);
   var spotify = new SpotifyWebApi();
 
@@ -174,18 +167,20 @@ function CreatePlaylist() {
             <Flex
               rounded="2xl"
               shadow="2xl"
-              border="12px solid"
+              border={["6px", "8px", "8px", "12px"]}
+              borderStyle="solid"
               borderColor={"#2feaa8"}
               bg="gray.700"
             >
               <Flex
-                rounded="xl"
+                rounded="2xl"
                 shadow="2xl"
                 bg="gray.700"
                 flexDir={"column"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
-                p={[12, 12, 24]}
+                px={[16, 16, 18, 24]}
+                py={[24]}
               >
                 <VStack spacing={["64px"]}>
                   <Heading>got your top tracks 🎉</Heading>
@@ -214,22 +209,24 @@ function CreatePlaylist() {
           <Flex
             rounded="2xl"
             shadow="2xl"
-            border="12px solid"
+            border={["6px", "8px", "8px", "12px"]}
+            borderStyle="solid"
             borderColor={"#2feaa8"}
             bg="gray.700"
           >
             <Flex
-              rounded="xl"
+              rounded="2xl"
               shadow="2xl"
               bg="gray.700"
               flexDir={"column"}
               justifyContent={"space-between"}
               alignItems={"center"}
-              p={[12, 12, 24]}
+              px={[16, 16, 18, 24]}
+              py={[24]}
             >
               <VStack spacing={["64px"]}>
                 <Heading mb={4}>success! 🎉</Heading>
-                <Text mb={2} textStyle="t2">
+                <Text mb={2} textStyle="t2" textAlign={"center"}>
                   created playlist{" "}
                   <Link
                     isExternal
@@ -237,8 +234,7 @@ function CreatePlaylist() {
                     pr={1}
                     color="green.400"
                     textDecoration="underline"
-                    textD
-                    textDecorationThickness={"5px"}
+                    textDecorationThickness={"auto"}
                     _hover={{ color: "green.500" }}
                   >
                     {form.playlistName}

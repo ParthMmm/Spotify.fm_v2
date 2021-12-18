@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, Flex, Heading, Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
-import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
+import { useSpring, animated } from "react-spring";
 import FormCard from "./FormCard";
 
 function Card() {
@@ -17,13 +17,7 @@ function Card() {
   });
   return (
     <>
-      <Flex
-        height="100vh"
-        w="100%"
-        alignItems="center"
-        justifyContent="center"
-        // direction="column"
-      >
+      <Flex height="100vh" w="100%" alignItems="center" justifyContent="center">
         <animated.div style={styles}>
           <FormCard />
         </animated.div>

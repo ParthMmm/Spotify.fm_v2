@@ -1,10 +1,9 @@
-import { Flex, Box, Button, Link, Icon, Text } from "@chakra-ui/react";
+import { Box, Button, Link, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { redirectUrlToSpotifyForLogin } from "../utils/spotifyFunctions";
-import { store } from "../app/store";
 import { FaSpotify } from "react-icons/fa";
 import useBoop from "../utils/useBoop";
-import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
+import { useSpring, animated, a } from "react-spring";
 
 function SpotifyLogin() {
   const boopConfig = {
