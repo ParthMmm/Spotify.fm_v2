@@ -9,7 +9,8 @@ function Landing() {
     <Flex
       rounded="2xl"
       shadow="2xl"
-      border="12px solid"
+      border={["6px", "8px", "8px", "12px"]}
+      borderStyle="solid"
       borderColor={"#2feaa8"}
       bg="gray.700"
     >
@@ -20,9 +21,10 @@ function Landing() {
         flexDir={"column"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        p={[8, 8, 24]}
+        px={[16, 16, 18, 24]}
+        py={[24]}
       >
-        <VStack spacing={["128px", "128px"]}>
+        <VStack spacing={["128px"]}>
           <HeadingTitle />
           <SpotifyLogin />
           <MainContent />

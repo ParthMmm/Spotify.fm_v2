@@ -125,7 +125,11 @@ function UserForm() {
   return (
     <>
       <Flex flexDir="column" alignItems={"center"}>
-        <FormControl isInvalid={Boolean(errors?.username)} mb={6} mx={36}>
+        <FormControl
+          isInvalid={Boolean(errors?.username)}
+          mb={6}
+          mx={"2.25rem"}
+        >
           <animated.div style={inputsStyle}>
             <Input
               type="username"

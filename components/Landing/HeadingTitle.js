@@ -65,7 +65,7 @@ function HeadingTitle() {
               _hover={{
                 bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
               }}
-              fontSize="4rem"
+              fontSize={["3rem", "4rem"]}
             >
               <Link
                 onClick={() => {
@@ -96,7 +96,7 @@ function HeadingTitle() {
               _hover={{
                 bgGradient: "linear(to-l, #2feaa8,#028cf3, #C779D0)",
               }}
-              fontSize="4rem"
+              fontSize={["3rem", "4rem"]}
             >
               <Link
                 onClick={() => {

@@ -9,18 +9,20 @@ function FormCard() {
     <Flex
       rounded="2xl"
       shadow="2xl"
-      border="12px solid"
+      border={["6px", "8px", "8px", "12px"]}
+      borderStyle="solid"
       borderColor={"#2feaa8"}
       bg="gray.700"
     >
       <Flex
-        rounded="xl"
+        rounded="2xl"
         shadow="2xl"
         bg="gray.700"
         flexDir={"column"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        p={[12, 12, 24]}
+        px={[16, 16, 18, 24]}
+        py={[24]}
       >
         <VStack spacing={["128px"]}>
           <HeadingTitle />

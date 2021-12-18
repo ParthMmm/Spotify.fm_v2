@@ -11,12 +11,12 @@ function MainContent() {
           direction="row"
           d="flex"
           alignItems={"center"}
-          spacing={["2px", "4px", "6px"]}
+          spacing={["4px", "4px", "6px"]}
           mb={2}
           mr={2}
         >
           <Trail>
-            <Text as="span" textStyle="t2">
+            <Text as="span" textStyle="t2" pr={["1", "0", "0"]}>
               create
             </Text>
             <Text
@@ -24,6 +24,7 @@ function MainContent() {
               textStyle="t2"
               _hover={{ color: "green.500" }}
               color={"green.400"}
+              pr={["1", "0", "0"]}
             >
               spotify
             </Text>
@@ -41,7 +42,7 @@ function MainContent() {
           mr={2}
         >
           <Trail>
-            <Text as="span" textStyle="t2">
+            <Text as="span" textStyle="t2" pr={["1", "0", "0"]}>
               from
             </Text>
             <Text as="span" textStyle="t2">
@@ -63,6 +64,7 @@ function MainContent() {
               textStyle="t2"
               _hover={{ color: "red.500" }}
               color={"red.400"}
+              pr={["1", "0", "0"]}
             >
               last.fm
             </Text>
