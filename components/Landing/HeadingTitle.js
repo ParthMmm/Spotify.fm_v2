@@ -1,14 +1,18 @@
 import React from "react";
-import { Text, Flex, Heading, Box, Link } from "@chakra-ui/react";
+import { Flex, Heading, Link } from "@chakra-ui/react";
 import useBoop from "../../utils/useBoop";
-import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
-import { RootState, store } from "../../app/store";
+import { useSpring, animated } from "react-spring";
+import { store } from "../../app/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { pageSlice } from "../../app/pageSlice";
 
 function HeadingTitle() {
   const router = useRouter();
+
+  const { page } = useSelector((RootState) => RootState.page);
+  const { token } = useSelector((RootState) => RootState.code);
+
   const boopConfig = {
     x: 0,
     y: 0,
@@ -20,9 +24,6 @@ function HeadingTitle() {
       friction: 15,
     },
   };
-
-  const { page } = useSelector((RootState) => RootState.page);
-  const { token } = useSelector((RootState) => RootState.code);
 
   const titleStyleForm = useSpring({
     config: { mass: 6, tension: 300, friction: 40 },
@@ -48,11 +49,11 @@ function HeadingTitle() {
   });
 
   const [style, setIsBooped] = useBoop(boopConfig);
+
   if (token || page === "form") {
     return (
       <animated.div style={titleStyleForm}>
         <Flex justifyContent="center">
-          {" "}
           <animated.div
             onMouseEnter={() => setIsBooped(true)}
             onMouseLeave={() => setIsBooped(false)}
@@ -72,10 +73,8 @@ function HeadingTitle() {
                   store.dispatch(pageSlice.actions.setPage("landing"));
                 }}
               >
-                {" "}
                 spotify.fm
               </Link>
-              {/* spotify.fm */}
             </Heading>
           </animated.div>
         </Flex>
@@ -86,7 +85,6 @@ function HeadingTitle() {
     return (
       <animated.div style={titleStyleLanding}>
         <Flex justifyContent="center">
-          {" "}
           <animated.div
             onMouseEnter={() => setIsBooped(true)}
             onMouseLeave={() => setIsBooped(false)}
@@ -106,10 +104,8 @@ function HeadingTitle() {
                   store.dispatch(pageSlice.actions.setPage("landing"));
                 }}
               >
-                {" "}
                 spotify.fm
               </Link>
-              {/* spotify.fm */}
             </Heading>
           </animated.div>
         </Flex>

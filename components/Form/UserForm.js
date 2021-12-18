@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Flex,
@@ -6,13 +6,12 @@ import {
   FormErrorMessage,
   FormControl,
   Input,
-  Heading,
   Box,
   Select,
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useBoop from "../../utils/useBoop";
 
 import { store } from "../../app/store";
@@ -20,7 +19,6 @@ import { formSlice } from "../../app/formSlice";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
-import HeadingTitle from "../Landing/HeadingTitle";
 import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
 import { pageSlice } from "../../app/pageSlice";
 

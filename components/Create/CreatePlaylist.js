@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
-import { store, RootState } from "../../app/store";
+import { store } from "../../app/store";
 import {
   Text,
   Flex,
   Heading,
   Spinner,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  Box,
   Link,
   VStack,
   Button,
 } from "@chakra-ui/react";
 import SpotifyWebApi from "spotify-web-api-js";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { pageSlice } from "../../app/pageSlice";
 import Error from "../Error";
 import Loader from "../Loader";
-import { useTransition, useSpring, animated, useTrail, a } from "react-spring";
+import { animated } from "react-spring";
 import useBoop from "../../utils/useBoop";
 
 // interface TopTracks {
@@ -65,13 +59,12 @@ function CreatePlaylist() {
   let failed = [];
   let user_id = "";
   let playlist_id = "";
-  let playlist_url = "";
+
   const currDate = new Date().toLocaleString();
   const [success, setSuccess] = useState(false);
   const [spotError, setSpotError] = useState(false);
   const [playlistURL, setPlaylistURL] = useState("");
   const { form } = useSelector((RootState) => RootState.form);
-  const { code } = useSelector((RootState) => RootState.code);
   const { token } = useSelector((RootState) => RootState.code);
   var spotify = new SpotifyWebApi();
 
@@ -237,8 +230,7 @@ function CreatePlaylist() {
                     pr={1}
                     color="green.400"
                     textDecoration="underline"
-                    textD
-                    textDecorationThickness={"5px"}
+                    textDecorationThickness={"auto"}
                     _hover={{ color: "green.500" }}
                   >
                     {form.playlistName}
